@@ -289,7 +289,7 @@ def order(message):
 
 def update(message):
 	is_success = 1
-	if len(order_json):
+	if order_json.get('beverage') and order_json.get('milk'):
 		if beverage_extractor(message) or milk_extractor(message):
 			order_json['beverage'] = beverage_extractor(message) if beverage_extractor(message) else order_json['beverage']
 			order_json['milk'] = milk_extractor(message) if milk_extractor(message) else order_json['milk']
