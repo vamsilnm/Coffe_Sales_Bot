@@ -325,34 +325,33 @@ def update(message):
 if __name__ == '__main__':
 	while(1):
 		user_response = raw_input('Bot: Hi I am your Cafe Coffee Day Assistant.\nI can help you with booking or updating your beverage orders.\nUser: ')
-		intent,_ = intent_extractor(user_response)
-		if intent == 'beverage':
-			order(user_response)
-		elif intent == 'update':
-			update(user_response)
-		elif intent == 'greet':
-			user_response = raw_input('Bot:I can help you to try our exiting beverages with our customised milks\nUser: ')
-			intent,_ = intent_extractor(user_response)
+		intent,intent_confidence = intent_extractor(user_response)
+		if any(score>0 for score in intent_confidence):
 			if intent == 'beverage':
 				order(user_response)
 			elif intent == 'update':
 				update(user_response)
+			elif intent == 'greet':
+				user_response = raw_input('Bot:I can help you to try our exiting beverages with our customised milks\nUser: ')
+				intent,_ = intent_extractor(user_response)
+				if intent == 'beverage':
+					order(user_response)
+				elif intent == 'update':
+					update(user_response)
+				else:
+					print 'Bot: Sorry for not being able to server you.I am still learning'
 			else:
-				print 'Bot: Sorry for not being able to server you.I am still learning'
+				user_response = raw_input('Bot: Sorry for that.Can you let me know what you are looking for.\nUser:')
+				intent,_ = intent_extractor(user_response)
+				if intent == 'beverage':
+					order(user_response)
+				elif intent == 'update':
+					update(user_response)
+				else:
+					print 'Bot: Sorry for not being able to server you.I am still learning'
 		else:
-			user_response = raw_input('Bot: Sorry for that.Can you let me know what you are looking for.\nUser:')
-			intent,_ = intent_extractor(user_response)
-			if intent == 'beverage':
-				order(user_response)
-			elif intent == 'update':
-				update(user_response)
-			else:
-				print 'Bot: Sorry for not being able to server you.I am still learning'
-		# user_choice = raw_input('Bot: Do you want to continue\nUser: ')
-		# if assertion_intent(user_choice):
-		# 	continue
-		# elif not assertion_intent(user_choice):
-		# 	break
+			print 'Bot:Can we have a chat regarding Coffee itself\n'
+		
 
 
 

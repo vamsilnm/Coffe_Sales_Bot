@@ -6,11 +6,11 @@ vectorizer = TfidfVectorizer(stop_words='english',analyzer='word',lowercase=True
 
 data={
 	"global_no": {
-	"examples" : ["nope","no never","nah!","never","no","a big no","always a no","reject"]
+	"examples" : ["nope","no never","nah!","never","a big no","always a no","reject"]
 	
   },
 	"global_yes": {
-	"examples" : ["yes","yaa","go ahead","yup","yeah"]
+	"examples" : ["yes","yaa","go ahead","yup","yeah","ya"]
 	
   },
   "greet": {
@@ -94,7 +94,7 @@ clf = PassiveAggressiveClassifier(n_iter=50)
 clf.fit(X_vector,training_class)
 
 
-file_Name = "classif.p"
+file_Name = "classif_test.p"
 fileObject = open(file_Name,'wb') 
 pickle.dump(clf, fileObject)
 fileObject.close()
