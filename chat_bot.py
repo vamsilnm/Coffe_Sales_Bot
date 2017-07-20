@@ -8,7 +8,7 @@ from sklearn_crfsuite import metrics
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import PassiveAggressiveClassifier
-import pickle
+
 vectorizer = TfidfVectorizer(stop_words='english',analyzer='word',lowercase=True,sublinear_tf=True)
 
 order_json = {}

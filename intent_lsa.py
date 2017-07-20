@@ -1,8 +1,8 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import PassiveAggressiveClassifier
-import pickle
-vectorizer = TfidfVectorizer(analyzer='word',lowercase=True,sublinear_tf=True)
-
+from sklearn.decomposition import TruncatedSVD
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import Normalizer
+from sklearn.neighbors import KNeighborsClassifier
 
 data={
 	"global_no": {
@@ -78,6 +78,8 @@ data={
   }
 }
 
+vectorizer = TfidfVectorizer(analyzer='word',lowercase=True,use_idf=True,ngram_range=(1,2))
+
 training_text = []
 training_class = []
 
@@ -90,14 +92,17 @@ for label in data.keys():
 
 X_vector = vectorizer.fit_transform(training_text)
 
-clf = PassiveAggressiveClassifier(n_iter=50)
-clf.fit(X_vector,training_class)
+svd = TruncatedSVD(50)
+lsa = make_pipeline(svd, Normalizer(copy=False))
 
+X_train_lsa = lsa.fit_transform(X_vector)
 
-file_Name = "classif_test.p"
-fileObject = open(file_Name,'wb') 
-pickle.dump(clf, fileObject)
-fileObject.close()
+knn_tfidf = KNeighborsClassifier(n_neighbors=5, algorithm='brute', metric='cosine')
+knn_tfidf.fit(X_vector, training_class)
+
+knn_lsa = KNeighborsClassifier(n_neighbors=5, algorithm='brute', metric='cosine')
+knn_lsa.fit(X_train_lsa, training_class)
+
 
 
 
@@ -106,15 +111,9 @@ while(1):
 	out_put = []
 	out_put.append(raw_input('Enter: ').lower())
 	out_put_vector = vectorizer.transform(out_put)
-	out_put_class = clf.predict(out_put_vector)
-	print out_put_class
-	print clf.decision_function(out_put_vector)
-	# print clf.predict_proba(out_put_vector)
-
-
-
-
-
-
-
-
+	out_put_class = knn_tfidf.predict(out_put_vector)
+	print 'tf-idf: ',out_put_class
+	print 'tf-idf: ',knn_tfidf.predict_proba(out_put_vector)
+	out_put_vector_lsa = lsa.transform(out_put_vector)
+	print 'lsa: ',knn_lsa.predict(out_put_vector_lsa)
+	print 'lsa: ',knn_lsa.predict_proba(out_put_vector_lsa)

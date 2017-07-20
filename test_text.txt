@@ -1,0 +1,70 @@
+__label__modify_duration want to change duration of leave
+__label__modify_duration i want to change the date of leave
+__label__modify_duration i want to change number of days.
+__label__modify_duration i want to modify starting date of leave.
+__label__modify_duration want to change duration of leave.i want to modify ending date of leave
+__label__terminate want to cancel it.
+__label__terminate No terminate it.
+__label__terminate nah cancel it.
+__label__terminate can you cancel the leave application
+__label__terminate cancel it
+__label__modify want to modify
+__label__modify can you change it.
+__label__modify i want to change the date of leave and leave type
+__label__modify a small correction needs to be done
+__label__modify i want to modify starting date of leave and also leave type.
+__label__modify i want to modify ending date of leave and also leave type.
+__label__modify can you please change duration of leave along with leave type.
+__label__modify i want to change it.
+__label__modify_leave_type want to modify the leave type.
+__label__modify_leave_type can you change leave type.
+__label__modify_leave_type can i change category of leave appliedi want to change type of leave.
+__label__leave_end_date_present i want a leave for 2 days before 24th.
+__label__leave_end_date_present i want a leave for 5 days before 3rd.i want a leave for 6 days before 1st july.
+__label__leave_end_date_present i want a leave for 7 days before tomorrow.
+__label__leave_end_date_present i want a leave for 9 days before 2nd.
+__label__uncertain may be
+__label__uncertain probably
+__label__uncertain maybe
+__label__uncertain mostly
+__label__uncertain likely
+__label__uncertain not yet decided
+__label__uncertain hopefully
+__label__greet hello
+__label__greet hey there
+__label__greet good evening
+__label__greet what can you do for me
+__label__greet good afternoon
+__label__greet hi
+__label__greet hey
+__label__greet hey ho
+__label__greet whats up
+__label__greet good morning
+__label__greet what's up
+__label__greet whatsup
+__label__leave_start_date_present i want a leave for 2 days from 24th.
+__label__leave_start_date_present i want a leave for 5 days starting from 3rd.i want a leave for 6 days from 1st july.
+__label__leave_start_date_present i want a leave for 7 days from tomorrow.
+__label__leave_start_date_present i want to have leave for 2 days after jan 1st 2018
+__label__leave_start_date_present i want a leave for 9 days since 2nd.
+__label__global_no nope
+__label__global_no no never
+__label__global_no nah!
+__label__global_no never
+__label__global_no a big no
+__label__global_no always a no
+__label__global_no reject
+__label__global_yes yes
+__label__global_yes yaa
+__label__global_yes go ahead
+__label__global_yes yup
+__label__global_yes yeah
+__label__global_yes ya
+__label__global_yes a big yes
+__label__global_yes yea!
+__label__Leave application can you please sancation leave
+__label__Leave application i want to apply for annual leave
+__label__Leave application i want to apply for sick leave
+__label__Leave application hey bot can you please help me in application for leave
+__label__Leave application i want to have a leave for 25th july for attending my cousins marriage
+__label__Leave application i want to have a leave for only todayi want to apply for casual leave

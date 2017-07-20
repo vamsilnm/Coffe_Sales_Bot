@@ -1,8 +1,9 @@
+from textblob.classifiers import NaiveBayesClassifier as NBC
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.metrics import classification_report
+from sklearn import svm 
+from textblob import TextBlob
 import pickle
-vectorizer = TfidfVectorizer(analyzer='word',lowercase=True,sublinear_tf=True)
-
 
 data={
 	"global_no": {
@@ -10,7 +11,7 @@ data={
 	
   },
 	"global_yes": {
-	"examples" : ["yes","yaa","go ahead","yup","yeah","ya"]
+	"examples" : ["yes","yaa","go ahead","yup","yeah","ya","a big yes"]
 	
   },
   "greet": {
@@ -33,27 +34,7 @@ data={
 	  "coffee",
 	  "need a coffee",
 	  "need to order a cup coffee",
-	  "can i get a coffee",
-	  "get me a coffee",
-	  "get me a coffee please",
-	  "i would like to have cappuccino with soy milk",
-	  "i will go with cappuccino this time",
-	  "i like to go with cappuccino and soy milk",
-	  "i want cappuccino with almond milk",
-	  "i need a cappuccino with almond milk",
-	  "can you please get me a cappuucino with soy milk",
-	  "can you get me a cappuccino",
-	  "nothing can beat cappuccino",
-	  "i love to have cappuccino"
-	  "cappuccino",
-	  "can you get me a cappuccino",
-	  "please get me a cappuccino",
-	  "can you please get me a cappuccino",
-	  "i like to have cappuccino",
-	  "need to order a cappuccino",
-	  "please can i have cappuccino",
-	  "i like to have cappuccino",
-	  "i want to have cappuccino"
+	  "can i get a coffee"
 	]
   },
   "update": {
@@ -80,41 +61,28 @@ data={
 
 training_text = []
 training_class = []
-
+training_corpus = []
 for label in data.keys():
 	for text in data[label]["examples"]:
+		training_corpus.append((text,label))
 		training_class.append(label)
 		training_text.append(text)
+vectorizer = TfidfVectorizer(min_df=4, max_df=0.9)
+train_vectors = vectorizer.fit_transform(training_text)
 
-
-
-X_vector = vectorizer.fit_transform(training_text)
-
-clf = PassiveAggressiveClassifier(n_iter=50)
-clf.fit(X_vector,training_class)
-
-
-file_Name = "classif_test.p"
+model = NBC(training_corpus)
+file_Name = "intent_nb.p"
 fileObject = open(file_Name,'wb') 
-pickle.dump(clf, fileObject)
+pickle.dump(model, fileObject)
 fileObject.close()
 
+# model = svm.SVC(kernel='rbf')
+# model.fit(train_vectors, training_class)  
 
-
-
-while(1):
-	out_put = []
-	out_put.append(raw_input('Enter: ').lower())
-	out_put_vector = vectorizer.transform(out_put)
-	out_put_class = clf.predict(out_put_vector)
-	print out_put_class
-	print clf.decision_function(out_put_vector)
-	# print clf.predict_proba(out_put_vector)
-
-
-
-
-
-
-
+while 1:
+	test_sentence = raw_input('Enter: ')
+	# print model.predict(vectorizer.transform([test_sentence]))
+	print model.classify(test_sentence)
+	prob_dist = model.prob_classify(test_sentence)
+	print prob_dist.prob(model.classify(test_sentence)) 
 

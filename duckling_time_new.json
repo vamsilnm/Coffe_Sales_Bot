@@ -1,0 +1,1 @@
+{"out_put": [{"dim": "time", "end": 7, "start": 0, "value": {"grain": "day", "value": "2017-12-03T00:00:00.000+05:30", "others": [{"grain": "day", "value": "2017-12-03T00:00:00.000+05:30"}, {"grain": "day", "value": "2018-12-03T00:00:00.000+05:30"}, {"grain": "day", "value": "2019-12-03T00:00:00.000+05:30"}]}, "text": "dec 3rd"}]}
